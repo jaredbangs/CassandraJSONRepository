@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Cassandra;
 
-namespace CassandraJSONRepository
+namespace AgileHub.CassandraJSONRepository
 {
     public class Repository<TValue> : Repository<Guid,TValue>
     {

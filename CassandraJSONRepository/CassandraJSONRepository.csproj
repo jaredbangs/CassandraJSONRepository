@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{43308025-F611-4804-AEE2-7F7002F56E12}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>CassandraJSONRepository</RootNamespace>
-    <AssemblyName>CassandraJSONRepository</AssemblyName>
+    <RootNamespace>AgileHub.CassandraJSONRepository</RootNamespace>
+    <AssemblyName>AgileHub.CassandraJSONRepository</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

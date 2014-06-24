@@ -1,4 +1,4 @@
 #!/bin/bash
 clear
-fixie CassandraJSONRepository.Tests/bin/Debug/CassandraJSONRepository.Tests.dll
+fixie CassandraJSONRepository.Tests/bin/Debug/AgileHub.CassandraJSONRepository.Tests.dll
 

@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace CassandraJSONRepository
+namespace AgileHub.CassandraJSONRepository
 {
     public interface IJSONSerializer
     {

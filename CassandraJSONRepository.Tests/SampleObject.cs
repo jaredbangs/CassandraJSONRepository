@@ -1,6 +1,6 @@
 using System;
 
-namespace CassandraJSONRepository.Tests
+namespace AgileHub.CassandraJSONRepository.Tests
 {
     public class SampleObject
     {
