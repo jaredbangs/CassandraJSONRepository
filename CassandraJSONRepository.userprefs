@@ -1,22 +1,27 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CassandraJSONRepository.Tests/SampleObject.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CassandraJSONRepository/JSONSerializer.cs">
     <Files>
       <File FileName="CassandraJSONRepository/Repository.cs" Line="6" Column="1" />
       <File FileName="CassandraJSONRepository.Tests/RepositoryTests.cs" Line="4" Column="20" />
-      <File FileName="CassandraJSONRepository.Tests/SampleObject.cs" Line="3" Column="20" />
+      <File FileName="CassandraJSONRepository.Tests/SampleObject.cs" Line="17" Column="6" />
       <File FileName="CassandraJSONRepository/AssemblyInfo.cs" Line="1" Column="1" />
-      <File FileName="CassandraJSONRepository/JSONSerializer.cs" Line="4" Column="20" />
+      <File FileName="CassandraJSONRepository/JSONSerializer.cs" Line="32" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="CassandraJSONRepository" expanded="True" />
-          <Node name="CassandraJSONRepository.Tests" expanded="True" selected="True" />
+          <Node name="CassandraJSONRepository" expanded="True">
+            <Node name="JSONSerializer.cs" selected="True" />
+          </Node>
+          <Node name="CassandraJSONRepository.Tests" expanded="True" />
         </State>
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

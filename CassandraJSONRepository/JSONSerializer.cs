@@ -13,12 +13,20 @@ namespace AgileHub.CassandraJSONRepository
     {
         public T DeserializeObject<T>(string json)
         {
-            return JsonConvert.DeserializeObject<T>(json);
+            return JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Objects,
+                TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple
+            });
         }
 
         public string SerializeObject(object item)
         {
-            return JsonConvert.SerializeObject(item);
+            return JsonConvert.SerializeObject(item, Formatting.Indented, new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Objects,
+                TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple
+            });
         }
     }
 }
