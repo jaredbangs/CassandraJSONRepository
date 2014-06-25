@@ -46,6 +46,23 @@ namespace AgileHub.CassandraJSONRepository
             this.cluster.Dispose();
         }
 
+        public void Delete(TKey key)
+        {
+            using (ISession session = cluster.Connect())
+            {
+                this.Delete(session, key);
+            }
+        }
+
+        public void Delete(ISession session, TKey key)
+        {
+            var preparedStatement = session.Prepare("DELETE FROM " + keyspaceName +  "." + tableName +  " WHERE id = ?;");
+
+            var boundStatement = preparedStatement.Bind(key);
+
+            session.Execute(boundStatement);
+        }
+
         public TValue Get(TKey key)
         {
             using (ISession session = cluster.Connect())
@@ -56,13 +73,20 @@ namespace AgileHub.CassandraJSONRepository
 
         public TValue Get(ISession session, TKey key)
         {
-            var preparedStatement = session.Prepare("SELECT json FROM " + keyspaceName +  "." + tableName +  " WHERE id = ?;");
+            var preparedStatement = session.Prepare("SELECT json FROM " + keyspaceName + "." + tableName + " WHERE id = ?;");
 
             var boundStatement = preparedStatement.Bind(key);
 
             RowSet results = session.Execute(boundStatement);
 
-            return this.serializer.DeserializeObject<TValue>(results.GetRows().First().GetValue<string>("json"));
+            if (!results.IsExhausted())
+            {
+                return this.serializer.DeserializeObject<TValue>(results.GetRows().First().GetValue<string>("json"));
+            } 
+            else
+            {
+                return default(TValue);
+            }
         }
 
         public void Save(TKey key, TValue item)

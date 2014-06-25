@@ -28,6 +28,35 @@ namespace AgileHub.CassandraJSONRepository.Tests
             }
         }
 
+        public void GuidSaveGetAndDeleteTest()
+        {
+            var testObject = new SampleObject { Id = Guid.NewGuid(), Name = "Testing" + random.Next(), Start = DateTime.UtcNow };
+
+            using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName))
+            {
+                target.Save(testObject.Id, testObject);
+            }
+
+            using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName))
+            {
+                var reloaded = target.Get(testObject.Id);
+                reloaded.Name.ShouldEqual(testObject.Name);
+                reloaded.Start.ShouldEqual(testObject.Start);
+            }
+
+            using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName))
+            {
+                target.Delete(testObject.Id);
+            }
+
+            using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName))
+            {
+                var reloaded = target.Get(testObject.Id);
+                reloaded.ShouldBeNull();
+            }
+
+        }
+
         public void StringSaveAndGetTest()
         {
             var testObject = new SampleStringIdObject { Id = Guid.NewGuid().ToString(), Name = "Testing" + random.Next(), Start = DateTime.UtcNow };
