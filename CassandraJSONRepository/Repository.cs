@@ -41,12 +41,6 @@ namespace AgileHub.CassandraJSONRepository
             }
         }
 
-        public void Dispose()
-        {
-            this.cluster.Shutdown();
-            this.cluster.Dispose();
-        }
-
         public void Delete(TKey key)
         {
             using (ISession session = cluster.Connect())
@@ -79,6 +73,12 @@ namespace AgileHub.CassandraJSONRepository
             var boundStatement = preparedStatement.Bind();
 
             session.Execute(boundStatement);
+        }
+
+        public void Dispose()
+        {
+            this.cluster.Shutdown();
+            this.cluster.Dispose();
         }
 
         public TValue Get(TKey key)
