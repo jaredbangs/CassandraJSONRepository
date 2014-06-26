@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cassandra;
 
@@ -63,6 +64,23 @@ namespace AgileHub.CassandraJSONRepository
             session.Execute(boundStatement);
         }
 
+        public void DeleteAll()
+        {
+            using (ISession session = cluster.Connect())
+            {
+                this.DeleteAll(session);
+            }
+        }
+
+        public void DeleteAll(ISession session)
+        {
+            var preparedStatement = session.Prepare("TRUNCATE " + keyspaceName + "." + tableName + ";");
+
+            var boundStatement = preparedStatement.Bind();
+
+            session.Execute(boundStatement);
+        }
+
         public TValue Get(TKey key)
         {
             using (ISession session = cluster.Connect())
@@ -86,6 +104,38 @@ namespace AgileHub.CassandraJSONRepository
             else
             {
                 return default(TValue);
+            }
+        }
+
+        public IEnumerable<TValue> GetAll()
+        {
+            using (ISession session = cluster.Connect())
+            {
+                foreach(var item in this.GetAll(session)) 
+                {
+                    yield return item;
+                }
+            }
+        }
+
+        public IEnumerable<TValue> GetAll(ISession session)
+        {
+            var preparedStatement = session.Prepare("SELECT json FROM " + keyspaceName + "." + tableName + ";");
+
+            var boundStatement = preparedStatement.Bind();
+
+            RowSet results = session.Execute(boundStatement);
+
+            if (!results.IsExhausted())
+            {
+                foreach(var row in results.GetRows())
+                {
+                    yield return this.serializer.DeserializeObject<TValue>(row.GetValue<string>("json"));
+                }
+            } 
+            else
+            {
+                yield return default(TValue);
             }
         }
 
