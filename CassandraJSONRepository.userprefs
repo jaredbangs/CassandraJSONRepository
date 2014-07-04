@@ -2,8 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="CassandraJSONRepository/Repository.cs">
     <Files>
-      <File FileName="CassandraJSONRepository/Repository.cs" Line="16" Column="1" />
-      <File FileName="CassandraJSONRepository.Tests/RepositoryTests.cs" Line="23" Column="36" />
+      <File FileName="CassandraJSONRepository/Repository.cs" Line="183" Column="14" />
+      <File FileName="CassandraJSONRepository.Tests/RepositoryTests.cs" Line="43" Column="1" />
+      <File FileName="CassandraJSONRepository/ILog.cs" Line="12" Column="22" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,9 +17,6 @@
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True" />
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

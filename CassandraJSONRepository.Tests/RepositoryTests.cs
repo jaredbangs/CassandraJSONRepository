@@ -8,6 +8,7 @@ namespace AgileHub.CassandraJSONRepository.Tests
     public class RepositoryTests
     {
         private readonly string keyspaceName = "CassandraJSONRepositoryTests";
+		private readonly ILog log = new NullLog();
         private readonly string nodeAddress = "192.168.8.124";
         private readonly Random random = new Random();
         private readonly IJSONSerializer serializer = new JSONSerializer(); 
@@ -18,7 +19,7 @@ namespace AgileHub.CassandraJSONRepository.Tests
 
             var savedObjects = new Dictionary<Guid,SampleObject>();
 
-            using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName))
+			using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName, log))
             {
                 target.DeleteAll();
 
@@ -32,7 +33,7 @@ namespace AgileHub.CassandraJSONRepository.Tests
                 }
             }
 
-            using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName))
+			using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName, log))
             {
                 IEnumerable<SampleObject> all = target.GetAll();
 
@@ -50,12 +51,12 @@ namespace AgileHub.CassandraJSONRepository.Tests
         {
             var testObject = new SampleObject { Id = Guid.NewGuid(), Name = "Testing" + random.Next(), Start = DateTime.UtcNow };
 
-            using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName))
+			using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName, log))
             {
                 target.Save(testObject.Id, testObject);
             }
 
-            using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName))
+			using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName, log))
             {
                 var reloaded = target.Get(testObject.Id);
 
@@ -68,24 +69,24 @@ namespace AgileHub.CassandraJSONRepository.Tests
         {
             var testObject = new SampleObject { Id = Guid.NewGuid(), Name = "Testing" + random.Next(), Start = DateTime.UtcNow };
 
-            using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName))
+			using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName, log))
             {
                 target.Save(testObject.Id, testObject);
             }
 
-            using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName))
+			using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName, log))
             {
                 var reloaded = target.Get(testObject.Id);
                 reloaded.Name.ShouldEqual(testObject.Name);
                 reloaded.Start.ShouldEqual(testObject.Start);
             }
 
-            using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName))
+			using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName, log))
             {
                 target.Delete(testObject.Id);
             }
 
-            using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName))
+			using (var target = new Repository<SampleObject>(serializer, nodeAddress, keyspaceName, log))
             {
                 var reloaded = target.Get(testObject.Id);
                 reloaded.ShouldBeNull();
