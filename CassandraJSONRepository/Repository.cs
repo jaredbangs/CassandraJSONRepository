@@ -51,7 +51,7 @@ namespace AgileHub.CassandraJSONRepository
             }
         }
 
-        public void Delete(TKey key)
+		public virtual void Delete(TKey key)
         {
 			this.log.Information ("Delete session starting");
             using (ISession session = cluster.Connect())
@@ -72,7 +72,7 @@ namespace AgileHub.CassandraJSONRepository
 			this.log.Information ("Delete ending");
         }
 
-        public void DeleteAll()
+		public virtual void DeleteAll()
         {
 			this.log.Information ("DeleteAll session starting");
             using (ISession session = cluster.Connect())
@@ -93,7 +93,7 @@ namespace AgileHub.CassandraJSONRepository
 			this.log.Information ("DeleteAll ending");
         }
 
-        public void Dispose()
+		public virtual void Dispose()
         {
 			this.log.Information ("Dispose starting");
             this.cluster.Shutdown();
@@ -101,7 +101,7 @@ namespace AgileHub.CassandraJSONRepository
 			this.log.Information ("Dispose ending");
         }
 
-        public TValue Get(TKey key)
+		public virtual TValue Get(TKey key)
         {
 			this.log.Information ("Get session starting");
             using (ISession session = cluster.Connect())
@@ -132,7 +132,7 @@ namespace AgileHub.CassandraJSONRepository
             }
         }
 
-        public IEnumerable<TValue> GetAll()
+		public virtual IEnumerable<TValue> GetAll()
         {
 			this.log.Information ("GetAll session starting");
             using (ISession session = cluster.Connect())
@@ -174,7 +174,7 @@ namespace AgileHub.CassandraJSONRepository
             return cluster.Connect();
         }
 
-        public void Save(TKey key, TValue item)
+		public virtual void Save(TKey key, TValue item)
         {
 			this.log.Information ("Save session starting");
             using (ISession session = cluster.Connect())
